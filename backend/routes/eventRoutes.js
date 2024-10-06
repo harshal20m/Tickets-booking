@@ -1,5 +1,12 @@
 const express = require("express");
-const { createEvent, getEvents, updateEvent, deleteEvent, getEventById } = require("../controllers/eventController");
+const {
+	createEvent,
+	getEvents,
+	updateEvent,
+	deleteEvent,
+	getEventById,
+	bulkCreation,
+} = require("../controllers/eventController");
 const { auth, adminAuth } = require("../middlewares/authMiddleware");
 const { validateEventCreation, validate } = require("../validations/validate");
 
@@ -12,5 +19,8 @@ router.get("/:id", getEventById);
 router.post("/", auth, adminAuth, validateEventCreation, validate, createEvent);
 router.put("/:id", auth, adminAuth, validateEventCreation, validate, updateEvent);
 router.delete("/:id", auth, adminAuth, deleteEvent);
+
+//bulk addition of events
+router.post("/bulk", auth, adminAuth, validateEventCreation, bulkCreation);
 
 module.exports = router;

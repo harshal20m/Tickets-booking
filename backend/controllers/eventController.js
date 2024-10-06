@@ -2,12 +2,14 @@ const Event = require("../models/Event");
 
 // Create new event (admin only)
 exports.createEvent = async (req, res) => {
-	const { title, description, date, price, availableSeats } = req.body;
+	const { title, description, date, city, price, availableSeats } = req.body;
+	console.log(req.body);
 	try {
-		const newEvent = new Event({ title, description, date, price, availableSeats });
+		const newEvent = new Event({ title, description, date, price, availableSeats, city });
 		await newEvent.save();
 		res.status(201).json(newEvent);
 	} catch (err) {
+		console.log("nananana");
 		res.status(500).json({ message: "Server error" });
 	}
 };
@@ -52,5 +54,15 @@ exports.deleteEvent = async (req, res) => {
 		res.json({ message: "Event deleted successfully" });
 	} catch (err) {
 		res.status(500).json({ message: "Server error" });
+	}
+};
+
+exports.bulkCreation = async (req, res) => {
+	try {
+		const events = req.body; // Expecting an array of events
+		const createdEvents = await Event.insertMany(events);
+		res.status(201).json(createdEvents);
+	} catch (error) {
+		res.status(500).json({ message: "Server error", error });
 	}
 };
