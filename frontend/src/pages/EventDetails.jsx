@@ -1,28 +1,33 @@
-// src/pages/EventDetails.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
+import { toast } from "react-toastify"; // Import toast for notifications
 
 const EventDetails = () => {
 	const { id } = useParams();
 	const [event, setEvent] = useState(null);
 	const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+	const [loading, setLoading] = useState(false); // Track loading state
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchEvent = async () => {
+			setLoading(true);
 			try {
 				const response = await axiosInstance.get(`/events/${id}`);
 				setEvent(response.data);
 			} catch (error) {
 				console.error("Error fetching event:", error);
+				toast.error("Failed to load event details."); // Notify user of the error
+			} finally {
+				setLoading(false);
 			}
 		};
 		fetchEvent();
 	}, [id]);
 
 	useEffect(() => {
-		// Check user login status (you can modify this based on your auth implementation)
+		// Check user login status
 		const token = localStorage.getItem("token");
 		if (token) {
 			setIsLoggedIn(true);
@@ -33,13 +38,23 @@ const EventDetails = () => {
 		if (!isLoggedIn) {
 			navigate("/login"); // Redirect to login if not logged in
 		} else {
-			// Handle booking logic (e.g., save booking to the database)
-			console.log("Booking event:", event.title);
-			// Optionally redirect to a booking confirmation page or show a success message
+			// Navigate to the Payment page with event details
+			navigate("/payment", {
+				state: {
+					amount: event.price, // Ensure amount is passed correctly
+					bookingDetails: {
+						title: event.title,
+						date: event.date,
+						price: event.price, // Include the price here
+					},
+				},
+			});
 		}
 	};
 
-	if (!event) return <p className="text-center mt-10">Loading...</p>;
+	if (loading) return <p className="text-center mt-10">Loading...</p>; // Loading state
+
+	if (!event) return <p className="text-center mt-10">Event not found.</p>; // Error state
 
 	return (
 		<div className="container mx-auto p-6 bg-gray-100 min-h-screen">

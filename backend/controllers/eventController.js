@@ -1,4 +1,5 @@
 const Event = require("../models/Event");
+const User = require("../models/User");
 
 // Create new event (admin only)
 exports.createEvent = async (req, res) => {
@@ -64,5 +65,17 @@ exports.bulkCreation = async (req, res) => {
 		res.status(201).json(createdEvents);
 	} catch (error) {
 		res.status(500).json({ message: "Server error", error });
+	}
+};
+
+exports.myBookings = async (req, res) => {
+	try {
+		const userId = req.user.userId;
+		const user = await User.findById(userId);
+		if (!user) return res.status(404).json({ message: "User not found" });
+
+		res.json(user.bookings); // Send user bookings
+	} catch (error) {
+		res.status(500).json({ message: "Server error" });
 	}
 };

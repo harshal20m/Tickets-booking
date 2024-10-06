@@ -33,7 +33,10 @@ exports.login = async (req, res) => {
 			expiresIn: "12h",
 		});
 
-		res.json({ token, user });
+		// res.json({ token, user });
+		setTimeout(() => {
+			res.json({ token, user });
+		}, 3000);
 	} catch (err) {
 		res.status(500).json({ message: "Server error" });
 	}

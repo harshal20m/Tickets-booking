@@ -11,7 +11,7 @@ const Home = () => {
 				const response = await axiosInstance.get("/events");
 				setEvents(response.data);
 			} catch (error) {
-				console.error("Error fetching events:", error);
+				console.error("Error fetching events:", error.response ? error.response.data : error.message);
 			}
 		};
 		fetchEvents();
