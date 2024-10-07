@@ -68,6 +68,7 @@ Make sure you have the following installed on your machine:
    RAZORPAY_SECRET=your_razorpay_secret
     ```
 2.**Replace the placeholders (your_mongodb_connection_string, your_jwt_secret, your_razorpay_key_id, and your_razorpay_secret) with your actual credentials.**
+
    **Start the server:**
   ```bash
   cd server
