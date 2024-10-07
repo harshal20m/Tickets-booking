@@ -43,14 +43,17 @@ Make sure you have the following installed on your machine:
    ```bash
    git clone https://github.com/harshal20m/Tickets-booking.git
    cd Tickets-booking
+   
 2. **Navigate to the server directory and install dependencies:**
    cd server
    npm install
-3. **Navigate to the client directory and install dependencies:**
+   
+4. **Navigate to the client directory and install dependencies:**
    cd ../client
    npm install
+   
 
-### Configuration
+## Configuration
 
 1. **Create a .env file in the server directory and add the following environment variables:**
    PORT=5000
@@ -67,4 +70,4 @@ Make sure you have the following installed on your machine:
     npm run dev
 
 ##Contributing
-Contributions are welcome! If you'd like to contribute to the project, please fork the repository and submit a pull request.
+  Contributions are welcome! If you'd like to contribute to the project, please fork the   repository and submit a pull request.
