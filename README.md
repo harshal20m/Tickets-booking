@@ -60,11 +60,13 @@ Make sure you have the following installed on your machine:
 ## Configuration
 
 1. **Create a .env file in the server directory and add the following environment variables:**
+    ```bash
    PORT=5000
    MONGODB_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
    RAZORPAY_KEY_ID=your_razorpay_key_id
    RAZORPAY_SECRET=your_razorpay_secret
+    ```
 2.**Replace the placeholders (your_mongodb_connection_string, your_jwt_secret, your_razorpay_key_id, and your_razorpay_secret) with your actual credentials.**
    Start the server:
     cd server
