@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../utils/axiosInstance";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 	const [events, setEvents] = useState([]);
@@ -29,12 +30,12 @@ const Home = () => {
 						<p className="text-gray-700 mb-4">{event.description}</p>
 						<p className="text-sm text-gray-500 mb-4">Date: {new Date(event.date).toLocaleDateString()}</p>
 						<p className="text-sm text-gray-500 mb-4">Price: Rs.{event.price} onwards</p>
-						<a
-							href={`/event/${event._id}`}
+						<Link
+							to={`/event/${event._id}`}
 							className="inline-block px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors duration-200"
 						>
 							View Details
-						</a>
+						</Link>
 					</div>
 				))}
 			</div>
