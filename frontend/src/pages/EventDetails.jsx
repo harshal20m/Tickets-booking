@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
-import { toast } from "react-toastify"; // Import toast for notifications
+import { toast } from "react-toastify";
 
 const EventDetails = () => {
 	const { id } = useParams();
 	const [event, setEvent] = useState(null);
-	const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
-	const [loading, setLoading] = useState(false); // Track loading state
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ const EventDetails = () => {
 				setEvent(response.data);
 			} catch (error) {
 				console.error("Error fetching event:", error);
-				toast.error("Failed to load event details."); // Notify user of the error
+				toast.error("Failed to load event details.");
 			} finally {
 				setLoading(false);
 			}
@@ -27,7 +27,6 @@ const EventDetails = () => {
 	}, [id]);
 
 	useEffect(() => {
-		// Check user login status
 		const token = localStorage.getItem("token");
 		if (token) {
 			setIsLoggedIn(true);
@@ -36,25 +35,23 @@ const EventDetails = () => {
 
 	const handleBooking = () => {
 		if (!isLoggedIn) {
-			navigate("/login"); // Redirect to login if not logged in
+			navigate("/login");
 		} else {
-			// Navigate to the Payment page with event details
 			navigate("/payment", {
 				state: {
-					amount: event.price, // Ensure amount is passed correctly
+					amount: event.price,
 					bookingDetails: {
 						title: event.title,
 						date: event.date,
-						price: event.price, // Include the price here
+						price: event.price,
 					},
 				},
 			});
 		}
 	};
 
-	if (loading) return <p className="text-center mt-10">Loading...</p>; // Loading state
-
-	if (!event) return <p className="text-center mt-10">Event not found.</p>; // Error state
+	if (loading) return <p className="text-center mt-10">Loading...</p>;
+	if (!event) return <p className="text-center mt-10">Event not found.</p>;
 
 	return (
 		<div className="container mx-auto p-6 bg-gray-100 min-h-screen">
@@ -65,7 +62,7 @@ const EventDetails = () => {
 					Date: <span className="font-semibold">{new Date(event.date).toLocaleDateString()}</span>
 				</p>
 				<p className="text-sm text-gray-500 mb-4">
-					Price: <span className="font-semibold">${event.price}</span>
+					Price: <span className="font-semibold">Rs.{event.price}</span>
 				</p>
 				<button
 					onClick={handleBooking}

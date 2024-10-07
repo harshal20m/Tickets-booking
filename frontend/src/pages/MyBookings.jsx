@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Importing CSS for toast
+import "react-toastify/dist/ReactToastify.css";
+import axiosInstance from "../utils/axiosInstance";
+import TicketModal from "../Components/TicketModal"; // Import the modal component
 
 const MyBookings = () => {
 	const [bookings, setBookings] = useState([]);
+	const [selectedBooking, setSelectedBooking] = useState(null); // State for selected booking
+	const [isModalOpen, setModalOpen] = useState(false); // State for modal visibility
 
 	useEffect(() => {
 		const fetchBookings = async () => {
 			try {
-				const response = await axios.get("http://localhost:5000/api/events/mybookings", {
+				const response = await axiosInstance.get("/events/mybookings", {
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem("token")}`,
 					},
@@ -21,6 +24,12 @@ const MyBookings = () => {
 		};
 		fetchBookings();
 	}, []);
+
+	// Function to handle ticket click
+	const handleTicketClick = (booking) => {
+		setSelectedBooking(booking); // Set selected booking
+		setModalOpen(true); // Open modal
+	};
 
 	return (
 		<div className="container mx-auto p-6 min-h-screen">
@@ -44,15 +53,18 @@ const MyBookings = () => {
 							<p className="text-gray-600">
 								Ticket Number: <strong>{booking.ticketNumber}</strong>
 							</p>
-							<div className="mt-4">
-								<button className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-500 transition duration-200">
-									Details
-								</button>
-							</div>
+							{/* View Ticket Button with Glowing Effect */}
+							<button
+								onClick={() => handleTicketClick(booking)} // Click handler for opening modal
+								className="mt-4 py-2 px-4 bg-purple-600 text-white rounded shadow-lg hover:shadow-xl transition duration-300 relative overflow-hidden glow-button"
+							>
+								View Ticket
+							</button>
 						</li>
 					))}
 				</ul>
 			)}
+
 			<div className="mt-8 text-center">
 				<a
 					href="/"
@@ -61,6 +73,14 @@ const MyBookings = () => {
 					Browse More Events
 				</a>
 			</div>
+
+			{/* Modal for displaying ticket details */}
+			{isModalOpen && (
+				<TicketModal
+					booking={selectedBooking}
+					onClose={() => setModalOpen(false)} // Close handler
+				/>
+			)}
 		</div>
 	);
 };

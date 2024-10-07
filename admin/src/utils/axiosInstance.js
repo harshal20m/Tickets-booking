@@ -1,13 +1,7 @@
 import axios from "axios";
 const axiosInstance = axios.create({
-	baseURL:
-		import.meta.env.MODE === "production"
-			? import.meta.env.VITE_API_URL_PROD // Use production URL in production mode
-			: import.meta.env.VITE_API_URL_DEV, // Use development URL in development mode
+	baseURL: import.meta.env.VITE_API_URL_PROD,
 });
-console.log(import.meta.env.VITE_API_URL_DEV);
-console.log(import.meta.env.VITE_API_URL_PROD);
-console.log(import.meta.env.MODE);
 
 // Adding a request interceptor
 axiosInstance.interceptors.request.use(
@@ -20,6 +14,26 @@ axiosInstance.interceptors.request.use(
 		return config;
 	},
 	(error) => {
+		return Promise.reject(error);
+	}
+);
+
+axiosInstance.interceptors.response.use(
+	(response) => {
+		return response;
+	},
+	(error) => {
+		if (error.response) {
+			if (error.response.status === 401) {
+				localStorage.removeItem("token");
+				window.location.href = "/login";
+			} else if (error.response.status === 403) {
+				console.error("Access forbidden.");
+			} else if (error.response.status === 500) {
+				console.error("Internal Server Error.");
+			}
+		}
+
 		return Promise.reject(error);
 	}
 );

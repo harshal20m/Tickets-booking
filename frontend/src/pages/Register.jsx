@@ -14,13 +14,13 @@ const Register = () => {
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
-		setError(null); // Reset error state
+		setError(null);
 		try {
 			await axiosInstance.post("auth/register", { name, email, password });
 			toast.success("User Registered Succesfully");
 			navigate("/login");
 		} catch (error) {
-			setError("Registration failed. Please try again."); // Set error message
+			setError("Registration failed. Please try again.");
 			toast.error("Error registering:", error);
 		}
 	};

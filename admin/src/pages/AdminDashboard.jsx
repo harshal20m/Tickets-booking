@@ -1,14 +1,11 @@
-// src/pages/AdminDashboard.jsx
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Importing CSS for toast
-
+import "react-toastify/dist/ReactToastify.css";
 const AdminDashboard = () => {
 	const [events, setEvents] = useState([]);
-	const navigate = useNavigate(); // Hook for navigation
-
+	const navigate = useNavigate();
 	useEffect(() => {
 		const fetchEvents = async () => {
 			try {
@@ -35,9 +32,9 @@ const AdminDashboard = () => {
 	};
 
 	const handleLogout = () => {
-		localStorage.removeItem("token"); // Remove the token from localStorage
+		localStorage.removeItem("token");
 		toast.success("Logged out successfully");
-		navigate("/admin/login"); // Redirect to login page
+		navigate("/admin/login");
 	};
 
 	return (

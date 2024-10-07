@@ -1,10 +1,8 @@
-// src/pages/Login.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Importing CSS for toast
-
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -54,6 +52,15 @@ const Login = () => {
 					Don’t have an account?{" "}
 					<a href="/register" className="text-purple-500 hover:underline">
 						Register here
+					</a>
+					{" | "}
+					<a
+						href="https://admin-bookmyshow1.netlify.app/"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-purple-500 hover:underline"
+					>
+						Admin Login
 					</a>
 				</p>
 			</div>

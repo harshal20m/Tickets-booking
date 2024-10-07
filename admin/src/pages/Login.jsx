@@ -1,10 +1,8 @@
-// src/pages/Login.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Importing CSS for toast
-
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -15,8 +13,8 @@ const Login = () => {
 		try {
 			const response = await axiosInstance.post("/auth/login", { email, password });
 			localStorage.setItem("token", response.data.token);
-			toast.success("Welcome"); // Store the token
-			navigate("/admin/dashboard"); // Redirect to the admin dashboard
+			toast.success("Welcome");
+			navigate("/admin/dashboard");
 		} catch (error) {
 			toast.error("wrong password or email");
 			console.error("Error logging in:", error);

@@ -1,0 +1,23 @@
+.ticket-modal {
+	border-radius: 2rem;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+	overflow: hidden; /* Prevent content overflow */
+	transition: all 0.3s ease;
+}
+
+.ticket-modal:hover {
+	transform: translateY(-5px);
+}
+
+.ticket-modal h2,
+.ticket-modal h3 {
+	letter-spacing: 0.05em;
+}
+
+.ticket-modal svg {
+	transition: transform 0.2s;
+}
+
+.ticket-modal button:hover svg {
+	transform: rotate(90deg);
+}

@@ -2,8 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-	baseURL: "http://localhost:5000/api",
-	timeout: 5000,
+	baseURL: import.meta.env.VITE_API_URL_PROD,
 });
 
 axiosInstance.interceptors.request.use(
@@ -15,17 +14,6 @@ axiosInstance.interceptors.request.use(
 		return config;
 	},
 	(error) => Promise.reject(error)
-);
-
-axiosInstance.interceptors.response.use(
-	(response) => response,
-	(error) => {
-		if (error.response && error.response.status === 401) {
-			localStorage.removeItem("token");
-			window.location.href = "/login";
-		}
-		return Promise.reject(error);
-	}
 );
 
 export default axiosInstance;

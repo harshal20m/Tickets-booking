@@ -1,17 +1,15 @@
-// src/components/Header.jsx
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Importing CSS for toast
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
 	const navigate = useNavigate();
-	const isLoggedIn = !!localStorage.getItem("token"); // Check login status
+	const isLoggedIn = !!localStorage.getItem("token");
 
 	const handleLogout = () => {
-		localStorage.removeItem("token"); // Remove token from local storage
+		localStorage.removeItem("token");
 		toast.success("Logged Out!!!");
-		navigate("/"); // Redirect to home or any other page
+		navigate("/");
 	};
 
 	return (
