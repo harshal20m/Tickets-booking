@@ -1,8 +1,13 @@
 import axios from "axios";
-
 const axiosInstance = axios.create({
-	baseURL: "http://localhost:5000/api", // Make sure this matches your backend URL
+	baseURL:
+		import.meta.env.MODE === "production"
+			? import.meta.env.VITE_API_URL_PROD // Use production URL in production mode
+			: import.meta.env.VITE_API_URL_DEV, // Use development URL in development mode
 });
+console.log(import.meta.env.VITE_API_URL_DEV);
+console.log(import.meta.env.VITE_API_URL_PROD);
+console.log(import.meta.env.MODE);
 
 // Adding a request interceptor
 axiosInstance.interceptors.request.use(
