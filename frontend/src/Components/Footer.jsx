@@ -1,16 +1,18 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
 	return (
 		<footer className="bg-gray-800 text-white py-4 mt-6">
 			<div className="container mx-auto text-center">
 				<p className="text-sm">&copy; {new Date().getFullYear()} Event Manager. All rights reserved.</p>
 				<p className="text-sm">
-					<a href="/privacy-policy" className="text-purple-500 hover:underline">
+					<Link to="/privacy-policy" className="text-purple-500 hover:underline">
 						Privacy Policy
-					</a>
+					</Link>
 					{" | "}
-					<a href="/terms" className="text-purple-500 hover:underline">
+					<Link to="/terms" className="text-purple-500 hover:underline">
 						Terms of Service
-					</a>
+					</Link>
 				</p>
 			</div>
 		</footer>
