@@ -70,13 +70,13 @@ Make sure you have the following installed on your machine:
 2.**Replace the placeholders (your_mongodb_connection_string, your_jwt_secret, your_razorpay_key_id, and your_razorpay_secret) with your actual credentials.**
    **Start the server:**
   ```bash
-      cd server
-      npm start
+  cd server
+  npm start
   ```
    **Start the client:**
   ```bash
-    cd ../client
-    npm run dev
+  cd ../client
+  npm run dev
   ```
 
 ## Contributing
