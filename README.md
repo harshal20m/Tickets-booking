@@ -43,3 +43,28 @@ Make sure you have the following installed on your machine:
    ```bash
    git clone https://github.com/harshal20m/Tickets-booking.git
    cd Tickets-booking
+2. **Navigate to the server directory and install dependencies:**
+   cd server
+   npm install
+3. **Navigate to the client directory and install dependencies:**
+   cd ../client
+   npm install
+
+### Configuration
+
+1. **Create a .env file in the server directory and add the following environment variables:**
+   PORT=5000
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   RAZORPAY_KEY_ID=your_razorpay_key_id
+   RAZORPAY_SECRET=your_razorpay_secret
+2.**Replace the placeholders (your_mongodb_connection_string, your_jwt_secret, your_razorpay_key_id, and your_razorpay_secret) with your actual credentials.**
+   Start the server:
+    cd server
+    npm start
+   Start the client:
+    cd ../client
+    npm run dev
+
+##Contributing
+Contributions are welcome! If you'd like to contribute to the project, please fork the repository and submit a pull request.
