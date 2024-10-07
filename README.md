@@ -45,15 +45,15 @@ Make sure you have the following installed on your machine:
    cd Tickets-booking
    
 2. **Navigate to the server directory and install dependencies:**
-  ```bash
+   ```bash
    cd server
    npm install
-```
+   ```
 
 4. **Navigate to the client directory and install dependencies:**
 
    ```bash
-    cd ../client
+   cd ../client
    npm install
    ```
 
