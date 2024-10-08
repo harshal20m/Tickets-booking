@@ -5,47 +5,51 @@ const TicketModal = ({ booking, onClose }) => {
 	if (!booking) return null;
 
 	return (
-		<div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-			<div className="bg-gradient-to-r from-purple-500 to-purple-700 p-8 rounded-[2rem] flex shadow-2xl relative w-11/12 max-w-3xl ticket-modal">
-				{/* Left Section */}
-				<div className="flex flex-col justify-between text-white">
-					<div className="text-center mb-6">
-						<h2 className="text-3xl font-extrabold tracking-wider">
-							book<span className="font-light">my</span>show
-						</h2>
-						<p className="text-2xl mt-1">x</p>
-						<p className="text-2xl font-semibold">{booking.eventTitle}</p>
+		<div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 ">
+			<div className="relative w-full max-w-2xl rounded-full">
+				{console.log(booking)}
+				{/* Ticket Structure */}
+				<div className="absolute top-0 left-0 w-8 h-8 bg-pink-100 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+				<div className="absolute bottom-0 left-0 w-8 h-8 bg-pink-100 rounded-full -translate-x-1/2 translate-y-1/2"></div>
+
+				<div className="bg-gradient-to-r from-purple-500 to-purple-700 p-6 rounded-l-3xl text-white shadow-2xl">
+					{/* Header Section */}
+					<div className="flex justify-between items-start mb-6">
+						<div>
+							<h2 className="text-3xl font-bold mb-2">bookmyshow</h2>
+							<div className="text-xl font-semibold mb-4">×</div>
+							<h3 className="text-2xl font-bold">{booking.eventTitle}</h3>
+						</div>
 					</div>
-					<div className="text-sm space-y-3 tracking-wider">
-						<div className="flex items-center space-x-2">
-							<i className="bx bx-map text-3xl"></i>
-							<span className="text-white text-xl font-semibold">My Show</span>
+
+					{/* Details Section */}
+					<div className="border-t border-b border-white py-4 mb-6">
+						<div className="flex justify-between text-sm">
+							<span>SHOW</span>
+							<span>{booking.city || "Venue Not Available"}</span>
+							<span>SEATS: {booking.seat || "N/A"}</span>
 						</div>
-						<div className="flex items-center space-x-2">
-							<i className="bx bx-time text-3xl"></i>
-							<span className="text-white text-xl font-semibold">My Time</span>
+					</div>
+
+					{/* Date and Time Section */}
+					<div className="flex">
+						<div className="flex-1 pr-4 border-r border-dashed">
+							<div className="text-sm mb-1">DATE:</div>
+							<div className="text-2xl font-bold">{new Date(booking.date).toLocaleDateString()}</div>
 						</div>
-						<div className="flex items-center space-x-2">
-							<i className="bx bx-checkbox-checked text-3xl"></i>
-							<span className="text-white text-xl font-semibold">My Seat</span>
+						<div className="flex-1 pl-4">
+							<div className="text-sm mb-1">TIME:</div>
+							<div className="text-2xl font-bold">{booking.time || "9:00 PM"}</div>
 						</div>
 					</div>
 				</div>
 
-				{/* Right Section */}
-				<div className="border-l-4 border-white ml-8 pl-8 flex flex-col justify-between text-white">
-					<div className="text-center">
-						<p className="text-sm uppercase tracking-wider">Date:</p>
-						<h3 className="text-2xl font-extrabold">{new Date(booking.date).toLocaleDateString()}</h3>
-						<p className="text-sm mt-4 uppercase tracking-wider">Time:</p>
-						<h3 className="text-2xl font-extrabold">9:00 PM</h3>
-					</div>
-					<div className="text-center mt-6">
-						<p className="text-sm uppercase tracking-wider">Price:</p>
-						<p className="text-2xl font-semibold">₹{booking.price}</p>
-						<p className="text-sm uppercase tracking-wider mt-4">Ticket Number:</p>
-						<p className="text-2xl font-semibold">{booking.ticketNumber}</p>
-					</div>
+				{/* Ticket Number and Price Section */}
+				<div className="absolute right-0 top-1/2 bg-purple-500 text-white p-4 rounded-r-3xl -translate-y-1/2">
+					<div className="text-xs mb-1">TICKET NO:</div>
+					<div className="text-sm font-semibold">{booking.ticketNumber}</div>
+					<div className="text-xs mt-3">PRICE:</div>
+					<div className="text-sm font-semibold">₹{booking.price}</div>
 				</div>
 
 				{/* Close Button */}
