@@ -1,8 +1,8 @@
 import React from "react";
-import "./TicketModal.css"; // Assuming you add the custom styles here
+import "./TicketModal.css";
 
 const TicketModal = ({ booking, onClose }) => {
-	if (!booking) return null; // If no booking, don't render the modal
+	if (!booking) return null;
 
 	return (
 		<div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
@@ -63,10 +63,6 @@ const TicketModal = ({ booking, onClose }) => {
 						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
 					</svg>
 				</button>
-
-				{/* Dotted Cuttings */}
-				<div className="absolute inset-x-0 top-0 h-2 border-t border-white border-dotted mt-[-10px]" />
-				<div className="absolute inset-x-0 bottom-0 h-2 border-b border-white border-dotted mb-[-10px]" />
 			</div>
 		</div>
 	);
